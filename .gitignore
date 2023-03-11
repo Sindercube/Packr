@@ -1,0 +1,17 @@
+.vscode
+__pycache__/
+*.egg-info/
+.mypy_cache
+.env
+build/
+pack_textures/
+pack_data/
+
+__pycache__/
+
+.vscode
+build/
+.pylintrc
+test.sh
+test_pack
+.github/

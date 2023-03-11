@@ -1,0 +1,19 @@
+[project]
+name = 'resource_packager'
+version = '1.3.0'
+description = "Package and optimize Minecraft Resource Packs"
+authors = [
+    { name = "Soumeh" }
+]
+dependencies = [
+    "Pillow",
+    "requests",
+]
+
+[tool.setuptools]
+packages = [
+    'resource_packager'
+]
+
+[project.scripts]
+principality = "resource_packager.__main__:main"

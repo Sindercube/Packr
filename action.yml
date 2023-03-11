@@ -1,0 +1,130 @@
+name: 'Resource Packager'
+description: 'Generate and Share Minecraft Resource Packs'
+author: 'Sindercube'
+
+inputs:
+
+  filename:
+    description: 'What to name the generated pack.'
+    default: 'pack.zip'
+    required: true
+
+  parts:
+    description: 'A list of files or directories to make the pack out of.'
+    required: false
+
+  output-directory:
+    description: 'What directory to store the pack in'
+    default: 'build/'
+    required: false
+
+  optimize-files:
+    description: "Whether or not to optimize JSON and texture files"
+    default: 'true'
+    required: false
+
+
+  release-name:
+    description: "The name of the release"
+    default: 'New Release'
+    required: false
+
+  release-version:
+    description: "The version of the release"
+    default: ''
+    required: false
+
+  changelog:
+    description: "The changelog for the release"
+    default: ''
+    required: false
+
+  minecraft-versions:
+    description: "What versions of Minecraft are supported with this release"
+    default: ''
+    required: false
+
+
+  github-repo:
+    description: "The Github repository to publish the release to"
+    default: ""
+    required: false
+  
+  modrinth-id:
+    description: "The Modrinth project ID to publish the release to"
+    default: ""
+    required: false
+
+  curseforge-id:
+    description: "The Curseforge project ID to publish the release to"
+    default: ""
+    required: false
+
+
+  github-token:
+    description: "The Github access token used to publish the release"
+    default: ""
+    required: false
+
+  modrinth-token:
+    description: "The Modrinth access token used to publish the release"
+    default: ""
+    required: false
+
+  curseforge-token:
+    description: "The Curseforge access token used to publish the release"
+    default: ""
+    required: false
+
+  #curseforge-project-token:
+  #  description: "The Curseforge access token used to publish the release"
+  #  default: ""
+  #  required: false
+
+outputs:
+
+  hash:
+    description: 'The SHA-1 hash of the pack'
+    value: "${{ steps.resource_packager.outputs.hash }}"
+
+  size:
+    description: 'The file size of the pack (in bytes)'
+    value: "${{ steps.resource_packager.outputs.size }}"
+
+branding:
+  icon: "folder-plus"
+  color: "blue"
+
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.10"
+
+    - name: Run Resource Packager
+      shell: bash
+      run: |
+
+        python -m "${{ github.action_path }}/resource_packager" \
+        \
+          -f "${{ inputs.filename }}" \
+          -p "${{ inputs.items }}" \
+          -d "${{ inputs.output-directory }}" \
+          -of "${{ inputs.optimize-files }}" \
+        \
+          -rn "${{ inputs.release-name }}" \
+          -rv "${{ inputs.release-version }}" \
+          -ch "${{ inputs.changelog }}" \
+          -mv "${{ inputs.minecraft-versions }}" \
+        \
+          -gr "${{ inputs.github-repo }}" \
+          -mi "${{ inputs.modrinth-id }}" \
+          -ci "${{ inputs.curseforge-id }}" \
+        \
+          -mt "${{ inputs.github-token }}" \
+          -gt "${{ inputs.modrinth-token }}" \
+          -ct "${{ inputs.curseforge-token }}" 
