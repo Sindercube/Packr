@@ -1,8 +1,8 @@
 from pathlib import Path
 from argparse import ArgumentParser
 
-from resource_packager import ResourcePack
-from resource_packager.hosts import Github, Modrinth, CurseForge
+from packr import ResourcePack
+from packr.hosts import Github, Modrinth, CurseForge
 
 class ArgumentError(Exception):
     pass

@@ -4,7 +4,7 @@ from hashlib import sha1
 
 from typing import List
 
-from resource_packager.optimizer import copy_and_optimize
+from packr.optimizer import copy_and_optimize
 
 
 class ResourcePack:

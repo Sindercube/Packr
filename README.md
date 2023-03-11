@@ -1,11 +1,11 @@
 <p align="center">
-  <h1 align="center"><b>Resource Packager</b></h1>
+  <h1 align="center"><b>Packr</b></h1>
   <img alt="GitHub Release" src="https://img.shields.io/github/v/release/Sindercube/Resource-Packager?include_prereleases">
 </p>
 
 # About
 
-**Resource Packager** is a Python CLI tool and a GitHub Workflow action used to make Minecraft Resource Packs out of multiple different directories and publish them to different distribution platforms.
+**Packr** is a Python CLI tool and a GitHub Workflow action used to make Minecraft Resource Packs out of multiple different directories and publish them to different distribution platforms.
 
 Intended to be used by Resource Pack creators who are tired of uploading their content to every platform manually, it simplifies the process to just creating a new Github release, and everything else getting updated.
 
@@ -27,22 +27,22 @@ The supported distribution platforms are:
 
 # CLI Usage
 
-To use resource_packager as a CLI tool, you first have to install it using `pip install git+https://gitlab.com/sindercube/resource_packager`
+To use packr as a CLI tool, you first have to install it using `pip install git+https://gitlab.com/sindercube/packr`
 
-After it is installed, use `python -m resource_packager -h` to view how to use the tool.
+After it is installed, use `python -m packr -h` to view how to use the tool.
 
 # Github Workflow Usage
 
 <!--
 > Click [here](https://github.com/Sorrowfall/RP-Example/generate) to create a new repository with the workflow already set up.
-Remember to edit `.github/workflows/build-packs.yml` to set up resource_packager correctly for your pack.
+Remember to edit `.github/workflows/build-packs.yml` to set up packr correctly for your pack.
 -->
 
 To automatically generate Resource Packs from the contents of your GitHub repository, you first have to make a new workflow YAML file in the `.github/workflows/` directory.
 
 ## Minimal Example
 
-This is an example of the simplest possible Resource Packager configuration, which just adds the pack files to your GitHub release.
+This is an example of the simplest possible Packr configuration, which just adds the pack files to your GitHub release.
 
 `publish.yml`
 ```yaml
@@ -76,7 +76,7 @@ jobs:
 
 ## Advanced Example
 
-A full showcase of what Resource Packager can do.
+A full showcase of what Packr can do.
 
 `publish.yml`
 ```yaml

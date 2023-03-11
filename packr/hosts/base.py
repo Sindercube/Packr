@@ -33,7 +33,7 @@ class Host:
         self.token = host_token
 
         self.headers[self.auth_header_key] = self.auth_header_prefix + host_token
-        self.headers['User-Agent'] = 'sindercu.be/resource_packager'
+        self.headers['User-Agent'] = 'sindercu.be/packr'
 
     def publish(self,
         version: str = None,
