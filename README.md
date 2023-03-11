@@ -27,7 +27,7 @@ The supported distribution platforms are:
 
 # CLI Usage
 
-To use packr as a CLI tool, you first have to install it using `pip install git+https://gitlab.com/sindercube/packr`
+To use packr as a CLI tool, you first have to install it using `pip install git+https://github.com/sindercube/packr`
 
 After it is installed, use `python -m packr -h` to view how to use the tool.
 
@@ -59,7 +59,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Build & Upload Pack (Minimal)
-        uses: Sindercube/Minecraft-Packr@v2.0.0
+        uses: Sindercube/Packr@v1
         with:
 
           filename: pack_min.zip # The file name of your pack.
@@ -98,7 +98,7 @@ jobs:
       #  uses: dawidd6/action-get-tag@v1
 
       - name: Build & Upload Pack
-        uses: Sindercube/Minecraft-Packr@v2.0.0
+        uses: Sindercube/Packr@v1
         with:
 
           filename: pack.zip

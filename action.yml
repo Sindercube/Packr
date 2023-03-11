@@ -93,15 +93,18 @@ runs:
     - uses: actions/checkout@v3
 
     - name: Setup Python
-      uses: actions/setup-python@v3
+      uses: actions/setup-python@v4
       with:
         python-version: "3.10"
+
+    - name: Install Packr
+      run: pip install git+https://github.com/sindercube/packr
 
     - name: Run Packr
       shell: bash
       run: |
 
-        python -m "${{ github.action_path }}/packr" \
+        python -m packr \
         \
           -f "${{ inputs.filename }}" \
           -p "${{ inputs.items }}" \
