@@ -1,4 +1,4 @@
-name: 'Packr'
+name: 'Minecraft-Packr'
 description: 'Generate and Share Minecraft Resource Packs'
 author: 'Sindercube'
 
@@ -6,12 +6,9 @@ inputs:
 
   filename:
     description: 'What to name the generated pack.'
-    default: 'pack.zip'
-    required: true
 
   parts:
     description: 'A list of files or directories to make the pack out of.'
-    required: false
 
   output-directory:
     description: 'What directory to store the pack in'
@@ -74,22 +71,17 @@ inputs:
   curseforge-token:
     description: "The Curseforge access token used to publish the release"
     default: ""
-    required: false
+    required: false 
 
-  #curseforge-project-token:
-  #  description: "The Curseforge access token used to publish the release"
-  #  default: ""
-  #  required: false
-
-outputs:
-
-  hash:
-    description: 'The SHA-1 hash of the pack'
-    value: "${{ steps.packr.outputs.hash }}"
-
-  size:
-    description: 'The file size of the pack (in bytes)'
-    value: "${{ steps.packr.outputs.size }}"
+#outputs:
+#
+#  hash:
+#    description: 'The SHA-1 hash of the pack'
+#    value: "${{ steps.packr.outputs.hash }}"
+#
+#  size:
+#    description: 'The file size of the pack (in bytes)'
+#    value: "${{ steps.packr.outputs.size }}"
 
 branding:
   icon: "folder-plus"
