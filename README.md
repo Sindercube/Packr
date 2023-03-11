@@ -1,6 +1,6 @@
 <p align="center">
   <h1 align="center"><b>Packr</b></h1>
-  <img alt="GitHub Release" src="https://img.shields.io/github/v/release/Sindercube/Resource-Packager?include_prereleases">
+  <img alt="GitHub Release" src="https://img.shields.io/github/v/release/Sindercube/Packr?include_prereleases">
 </p>
 
 # About
@@ -59,7 +59,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Build & Upload Pack (Minimal)
-        uses: Sindercube/Resource-Packager@v2.0.0
+        uses: Sindercube/Minecraft-Packr@v2.0.0
         with:
 
           filename: pack_min.zip # The file name of your pack.
@@ -98,7 +98,7 @@ jobs:
       #  uses: dawidd6/action-get-tag@v1
 
       - name: Build & Upload Pack
-        uses: Sindercube/Resource-Packager@v2.0.0
+        uses: Sindercube/Minecraft-Packr@v2.0.0
         with:
 
           filename: pack.zip
