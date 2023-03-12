@@ -1,6 +1,6 @@
 <p align="center">
   <h1 align="center"><b>Packr</b></h1>
-  <img alt="GitHub Release" src="https://img.shields.io/github/v/release/Sindercube/Packr?include_prereleases">
+  <img align="center" alt="GitHub Release" src="https://img.shields.io/github/v/release/Sindercube/Packr?include_prereleases">
 </p>
 
 # About

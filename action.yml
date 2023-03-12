@@ -58,7 +58,7 @@ inputs:
     required: false
 
   curseforge-id:
-    description: "The CurseForge project ID to publish the release to"
+    description: "The Curseforge project ID to publish the release to"
     default: ""
     required: false
 
@@ -74,7 +74,7 @@ inputs:
     required: false
 
   curseforge-token:
-    description: "The CurseForge access token used to publish the release"
+    description: "The Curseforge access token used to publish the release"
     default: ""
     required: false 
 

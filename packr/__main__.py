@@ -61,9 +61,6 @@ def main():
     print('Done!\n')
 
     hosts = []
-
-    if 
-
     if args.github_repo:
         if not args.github_token:
             raise MissingAuthError('A GitHub authorization token is required to upload a release to GitHub.')
@@ -74,7 +71,7 @@ def main():
         hosts.append(Modrinth(pack, args.modrinth_token, args.modrinth_id))
     if args.curseforge_id:
         if not args.curseforge_token:
-            raise MissingAuthError('A CurseForge authorization token is required to upload a release to CurseForge.')
+            raise MissingAuthError('A Curseforge authorization token is required to upload a release to Curseforge.')
         hosts.append(CurseForge(pack, args.curseforge_token, args.curseforge_id))
 
     for host in hosts:
