@@ -80,7 +80,11 @@ def main():
         if result.status_code in [200, 204]:
             print(f'Done! Uploaded successfully!\n')
         else:
-            print(f'Done! But the upload failed... {result.reason}\n')
+            print(f'Done! But the upload failed... {result.reason}')
+            try:
+                print(result.json(), '\n')
+            except Exception:
+                print('')
 
 
 if __name__ == '__main__':
