@@ -44,6 +44,9 @@ def main():
 
     args = gen_arguments()
 
+    # !!! TEMPORARY
+    print(args.modrinth_token)
+
     if not args.filename:
         raise ArgumentError('A filename is required to generate the pack.')
     if not args.parts:
