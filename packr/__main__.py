@@ -27,7 +27,7 @@ def gen_arguments():
     parser.add_argument('-rn', '--release-name', help="", default="New Release")
     parser.add_argument('-rv', '--release-version', help="", default=None)
     parser.add_argument('-ch', '--changelog', help="", default=None)
-    parser.add_argument('-mv', '--minecraft-versions', help="", nargs='*')
+    parser.add_argument('-mv', '--minecraft-versions', help="", type=strip, nargs='*')
 
     parser.add_argument('-gr', '--github-repo', help="", default=None)
     parser.add_argument('-mi', '--modrinth-id', help="", default=None)

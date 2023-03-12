@@ -112,16 +112,16 @@ runs:
           -f "${{ inputs.filename }}" \
           -p "${{ inputs.parts }}" \
           -d "${{ inputs.output-directory }}" \
-          -of "${{ inputs.optimize-files }}" \
+          -of ${{ inputs.optimize-files }} \
         \
           -rn "${{ inputs.release-name }}" \
-          -rv "${{ inputs.release-version }}" \
+          -rv ${{ inputs.release-version }} \
           -ch "${{ inputs.changelog }}" \
           -mv "${{ inputs.minecraft-versions }}" \
         \
-          -gr "${{ inputs.github-repo }}" \
-          -mi "${{ inputs.modrinth-id }}" \
-          -ci "${{ inputs.curseforge-id }}" \
+          -gr ${{ inputs.github-repo }} \
+          -mi ${{ inputs.modrinth-id }} \
+          -ci ${{ inputs.curseforge-id }} \
         \
           --github-token ${{ inputs.github-token }} \
           --modrinth-token ${{ inputs.modrinth-token }} \
