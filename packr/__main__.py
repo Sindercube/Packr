@@ -62,10 +62,10 @@ def main():
 
     hosts = []
 
-    if args.github_repo:
-        if not args.github_token:
-            raise MissingAuthError('A Github authorization token is required to upload a release to Github.')
-        hosts.append(Github(pack, args.github_token, args.github_repo))
+    #if args.github_repo:
+    #    if not args.github_token:
+    #        raise MissingAuthError('A Github authorization token is required to upload a release to Github.')
+    #    hosts.append(Github(pack, args.github_token, args.github_repo))
     if args.modrinth_id:
         if not args.modrinth_token:
             raise MissingAuthError('A Modrinth authorization token is required to upload a release to Modrinth.')
