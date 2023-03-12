@@ -12,12 +12,15 @@ class MissingAuthError(Exception):
 def is_true(value):
     return value.lower() in ('yes', 'true', 't', 'y', '1')
 
+def strip(value):
+    return value.strip().rstrip()
+
 def gen_arguments():
 
     parser = ArgumentParser()
 
     parser.add_argument('-f', '--filename', help="", nargs='?')
-    parser.add_argument('-p', '--parts', help="", nargs='*')
+    parser.add_argument('-p', '--parts', help="", type=strip, nargs='*')
     parser.add_argument('-d', '--output-directory', help="", default='build/')
     parser.add_argument('-of', '--optimize-files', type=is_true, nargs='?', const=True, default=False)
 
