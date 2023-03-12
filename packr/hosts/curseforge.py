@@ -31,6 +31,7 @@ class CurseForge(Host):
             'changelogType': "markdown",
             'displayName': version + ' - ' + title,
             'releaseType': release,
+            'changelog': changelog or '',
         }
 
         if minecraft_versions:
@@ -42,9 +43,6 @@ class CurseForge(Host):
                     metadata['gameVersions'].append(self.curseforge_versions[mcv])
         else:
             metadata['gameVersions'] = [9550]
-
-        if changelog:
-            metadata['changelog'] = changelog
 
         files_url = f'https://curserinth-api.kuylar.dev/v2/project/{self.id}/version'
         file_data = self.get(files_url).json()
