@@ -1,5 +1,5 @@
 from pathlib import Path
-from argparse import ArgumentParser
+from argparse import ArgumentParser, ArgumentTypeError
 
 from packr import ResourcePack
 from packr.hosts import Github, Modrinth, CurseForge
@@ -9,6 +9,9 @@ class ArgumentError(Exception):
 class MissingAuthError(Exception):
     pass
 
+def is_true(value):
+    return value.lower() in ('yes', 'true', 't', 'y', '1')
+
 def gen_arguments():
 
     parser = ArgumentParser()
@@ -16,7 +19,7 @@ def gen_arguments():
     parser.add_argument('-f', '--filename', help="", nargs='?')
     parser.add_argument('-p', '--parts', help="", nargs='*')
     parser.add_argument('-d', '--output-directory', help="", default='build/')
-    parser.add_argument('-of', '--optimize-files', help="", action='store_true', default=False)
+    parser.add_argument('-of', '--optimize-files', type=is_true, nargs='?', const=True, default=False)
 
     parser.add_argument('-rn', '--release-name', help="", default="New Release")
     parser.add_argument('-rv', '--release-version', help="", default=None)
