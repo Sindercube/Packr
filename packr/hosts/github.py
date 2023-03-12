@@ -44,9 +44,12 @@ class Github(Host):
 
         # check if release already has file
 
-        assets_url = request_data['assets_url']
-        assets = self.get(assets_url).json()
-        assets = {a['name']: str(a['id']) for a in assets}
+        if 'assets_url' not in request_data:
+            assets = {}
+        else:
+            assets_url = request_data['assets_url']
+            assets = self.get(assets_url).json()
+            assets = {a['name']: str(a['id']) for a in assets}
 
         # if yes, delete it
 

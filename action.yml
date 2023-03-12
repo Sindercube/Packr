@@ -106,7 +106,7 @@ runs:
     - name: Run Packr
       shell: bash
       run: |
-        cd $GITHUB_WORKSPACE
+
         python -m packr \
         \
           -f "${{ inputs.filename }}" \
