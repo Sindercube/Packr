@@ -91,6 +91,8 @@ runs:
   using: "composite"
   steps:
     - uses: actions/checkout@v3
+      with:
+        token: '${{ github.token }}'
 
     - name: Setup Python
       uses: actions/setup-python@v4
@@ -104,7 +106,7 @@ runs:
     - name: Run Packr
       shell: bash
       run: |
-
+        cd $GITHUB_WORKSPACE
         python -m packr \
         \
           -f "${{ inputs.filename }}" \
