@@ -33,19 +33,15 @@ def gen_arguments():
     parser.add_argument('-mi', '--modrinth-id', help="", default=None)
     parser.add_argument('-ci', '--curseforge-id', help="", default=None)
 
-    parser.add_argument('-mt', '--modrinth-token', help="", default=None)
     parser.add_argument('-gt', '--github-token', help="", default=None)
+    parser.add_argument('-mt', '--modrinth-token', help="", default=None)
     parser.add_argument('-ct', '--curseforge-token', help="", default=None)
-    #parser.add_argument('-cpt', '--curseforge-project-token', help="", default=None)
 
     return parser.parse_args()
 
 def main():
 
     args = gen_arguments()
-
-    # !!! TEMPORARY
-    print(args.modrinth_token == '***')
 
     if not args.filename:
         raise ArgumentError('A filename is required to generate the pack.')
@@ -65,10 +61,10 @@ def main():
 
     hosts = []
 
-    #if args.github_repo:
-    #    if not args.github_token:
-    #        raise MissingAuthError('A Github authorization token is required to upload a release to Github.')
-    #    hosts.append(Github(pack, args.github_token, args.github_repo))
+    if args.github_repo:
+        if not args.github_token:
+            raise MissingAuthError('A Github authorization token is required to upload a release to Github.')
+        hosts.append(Github(pack, args.github_token, args.github_repo))
     if args.modrinth_id:
         if not args.modrinth_token:
             raise MissingAuthError('A Modrinth authorization token is required to upload a release to Modrinth.')
@@ -84,7 +80,7 @@ def main():
         if result.status_code in [200, 204]:
             print(f'Done! Uploaded successfully!\n')
         else:
-            print(f'Done! But the upload failed... {result.reason}')
+            print(f'Done! But the upload failed... {result.reason}\n')
 
 
 if __name__ == '__main__':

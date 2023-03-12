@@ -123,6 +123,6 @@ runs:
           -mi "${{ inputs.modrinth-id }}" \
           -ci "${{ inputs.curseforge-id }}" \
         \
-          -mt "${{ inputs.github-token }}" \
-          -gt "${{ inputs.modrinth-token }}" \
-          -ct "${{ inputs.curseforge-token }}" 
+          --github-token ${{ inputs.github-token }} \
+          --modrinth-token ${{ inputs.modrinth-token }} \
+          --curseforge-token ${{ inputs.curseforge-token }}
