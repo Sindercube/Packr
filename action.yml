@@ -108,7 +108,7 @@ runs:
         python -m packr \
         \
           -f "${{ inputs.filename }}" \
-          -p "${{ inputs.items }}" \
+          -p "${{ inputs.parts }}" \
           -d "${{ inputs.output-directory }}" \
           -of "${{ inputs.optimize-files }}" \
         \

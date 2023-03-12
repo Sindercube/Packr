@@ -46,7 +46,7 @@ def main():
     if not args.parts:
         raise ArgumentError('Parts are required to generate the pack.')
     
-    print('Generating ResourcePack...')
+    print('Generating Resource Pack...')
 
     pack = ResourcePack(
         args.filename,
