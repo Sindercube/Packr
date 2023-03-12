@@ -40,7 +40,7 @@ class Host:
         title: str = None,
         changelog: str = None,
         minecraft_versions: List[str] = None,
-        release_type: Literal['release', 'prerelease'] = None,
+        prerelease: bool = False,
     ):
         pass
 

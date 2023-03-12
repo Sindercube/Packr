@@ -2,7 +2,7 @@ from json import dumps
 
 from .base import Host
 
-class Github(Host):
+class GitHub(Host):
 
     api_url = 'https://api.github.com/repos/'
     auth_header_key = 'Authorization'
@@ -14,7 +14,7 @@ class Github(Host):
         "X-GitHub-Api-Version": '2022-11-28'
     }
 
-    def publish(self, version = None, title = None, changelog = None, minecraft_versions = None, release_type = None):
+    def publish(self, version = None, title = 'New Release', changelog = '', minecraft_versions = None, prerelease = False):
         
         self.api_url += self.id + '/'
 
@@ -24,15 +24,11 @@ class Github(Host):
         releases = self.get(release_url).json()
         releases = {r['tag_name']: str(r['url']) for r in releases}
     
-        data = {}
-        if title:
-            data['name'] = title
-        if changelog:
-            data['body'] = changelog
-        if release_type != 'release':
-            data['prerelease'] = True
-        #if data:
-        #    self.patch(patch_url, data=dumps(data))
+        data = {
+            'name': title,
+            'body': changelog,
+            'prerelease': prerelease
+        }
     
         # if it exists
         if version in releases:

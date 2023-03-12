@@ -10,16 +10,15 @@ class Modrinth(Host):
     headers = {
     }
 
-    def publish(self, version = None, title = 'New Release', changelog = None, minecraft_versions = None, release_type = None):
+    def publish(self, version = None, title = 'New Release', changelog = None, minecraft_versions = None, prerelease = False):
 
         # generate release data
 
-        release = "release" if release_type == "release" else "beta"
         data = {
             'loaders': ['minecraft'],
             'dependencies': [],
             'game_versions': minecraft_versions,
-            'version_type': release,
+            'version_type': "beta" if prerelease else "release",
             'featured': False,
             'status': 'draft',
 

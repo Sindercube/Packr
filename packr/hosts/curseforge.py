@@ -24,13 +24,12 @@ class CurseForge(Host):
             if not version_name in self.curseforge_versions:
                 self.curseforge_versions[version_name] = version_id
 
-    def publish(self, version = None, title = 'New Release', changelog = None, minecraft_versions = None, release_type = None):
+    def publish(self, version = None, title = 'New Release', changelog = None, minecraft_versions = None, prerelease = False):
 
-        release = "release" if release_type == "release" else "beta"
         metadata = {
             'changelogType': "markdown",
             'displayName': version + ' - ' + title,
-            'releaseType': release,
+            'releaseType': "beta" if prerelease else "release",
             'changelog': changelog or '',
         }
 

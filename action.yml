@@ -35,6 +35,11 @@ inputs:
     description: "The changelog for the release"
     default: ''
     required: false
+  
+  prerelease:
+    description: "Whether the release is an early, preview release"
+    default: 'false'
+    required: false
 
   minecraft-versions:
     description: "What versions of Minecraft are supported with this release"
@@ -43,7 +48,7 @@ inputs:
 
 
   github-repo:
-    description: "The Github repository to publish the release to"
+    description: "The GitHub repository to publish the release to"
     default: ""
     required: false
   
@@ -53,13 +58,13 @@ inputs:
     required: false
 
   curseforge-id:
-    description: "The Curseforge project ID to publish the release to"
+    description: "The CurseForge project ID to publish the release to"
     default: ""
     required: false
 
 
   github-token:
-    description: "The Github access token used to publish the release"
+    description: "The GitHub access token used to publish the release"
     default: ""
     required: false
 
@@ -69,7 +74,7 @@ inputs:
     required: false
 
   curseforge-token:
-    description: "The Curseforge access token used to publish the release"
+    description: "The CurseForge access token used to publish the release"
     default: ""
     required: false 
 
@@ -117,6 +122,7 @@ runs:
           -rn "${{ inputs.release-name }}" \
           -rv ${{ inputs.release-version }} \
           -ch "${{ inputs.changelog }}" \
+          -pr "${{ inputs.prerelease }}" \
           -mv "${{ inputs.minecraft-versions }}" \
         \
           -gr ${{ inputs.github-repo }} \

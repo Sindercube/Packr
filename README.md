@@ -7,7 +7,7 @@
 
 **Packr** is a Python CLI tool and a GitHub Workflow action used to make Minecraft Resource Packs out of multiple different directories and publish them to different distribution platforms.
 
-Intended to be used by Resource Pack creators who are tired of uploading their content to every platform manually, it simplifies the process to just creating a new Github release, and everything else getting updated.
+Intended to be used by Resource Pack creators who are tired of uploading their content to every platform manually, it simplifies the process to just creating a new GitHub release, and everything else getting updated.
 
 The supported distribution platforms are:
 - [GitHub](https://github.com)
@@ -17,12 +17,11 @@ The supported distribution platforms are:
 # Table of Contents 
 
 - [CLI Usage](#cli-usage)
-- [Github Workflow Usage](#github-workflow-usage)
+- [GitHub Workflow Usage](#github-workflow-usage)
   - [Minimal Example](#minimal-example)
   - [Advanced Example](#advanced-example)
   - [Access Tokens](#access-tokens)
   - [Inputs](#inputs)
-- [Known Issues](#known-issues)
 - [Credits](#credits)
 
 # CLI Usage
@@ -31,7 +30,7 @@ To use packr as a CLI tool, you first have to install it using `pip install git+
 
 After it is installed, use `python -m packr -h` to view how to use the tool.
 
-# Github Workflow Usage
+# GitHub Workflow Usage
 
 <!--
 > Click [here](https://github.com/Sorrowfall/RP-Example/generate) to create a new repository with the workflow already set up.
@@ -55,21 +54,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - name: Checkout Repo
-        uses: actions/checkout@v2
-
-      - name: Build & Upload Pack (Minimal)
+      - name: Build & Upload Pack
         uses: Sindercube/Packr@v1
         with:
 
-          filename: pack_min.zip # The file name of your pack.
+          filename: pack.zip # The file name of your pack.
           parts: | # The files and folders you want to use in your pack. Separated with new lines.
-            test_pack/*
-          minecraft-versions: | # What Minecraft versions are supported by your pack? Separated with new lines
+            assets/*
+          # You should put your pack files inside of the assets/ folder, but you can change which folder is used with this. 
+          minecraft-versions: | # What Minecraft versions are supported by your pack. Add every new version on a new line.
             1.18.2
+          # 1.19.2 # Example of another version.
 
           # You shouldn't change these values unless you know what you're doing
-          github-repo: ${{ github.event.repository.name }}
+          github-repo: ${{ github.event.repository.full_name }}
           release-version: ${{ github.event.release.tag_name }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
 ```
@@ -90,13 +88,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - name: Checkout Repo
-        uses: actions/checkout@v2
-
-      #- name: Get Tag
-      #  id: tag
-      #  uses: dawidd6/action-get-tag@v1
-
       - name: Build & Upload Pack
         uses: Sindercube/Packr@v1
         with:
@@ -109,13 +100,14 @@ jobs:
           minecraft-versions: |
             1.18.2
 
-          github-repo: 'xxx/xxx'
           modrinth-id: 'xxxxxxxx'
           curseforge-id: '000000'
+          github-repo: ${{ github.event.repository.full_name }}
 
           release-name: ${{ github.event.release.name }}
-          release-version: ${{ github.event.release.tag_name }} #${{ steps.tag.outputs.tag }}
+          release-version: ${{ github.event.release.tag_name }}
           changelog: ${{ github.event.release.body }}
+          prerelease: ${{ github.event.release.prerelease }}
 
           github-token: ${{ secrets.GITHUB_TOKEN }}
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }} # https://modrinth.com/settings/account
@@ -126,7 +118,7 @@ jobs:
 
 ## Access Tokens
 
-To publish your pack to Modrinth or Curseforge, you have to make new [`MODRINTH_TOKEN`](https://modrinth.com/settings/account) and [`CURSEFORGE_TOKEN`](https://www.curseforge.com/account/api-tokens) secrets in your repository's settings in **Settings > Secrets & Variables > Actions**, then clicking the **New Repository Secret** button and filling out the data.
+To publish your pack to Modrinth or CurseForge, you have to make new [`MODRINTH_TOKEN`](https://modrinth.com/settings/account) and [`CURSEFORGE_TOKEN`](https://www.curseforge.com/account/api-tokens) secrets in your repository's settings in **Settings > Secrets & Variables > Actions**, then clicking the **New Repository Secret** button and filling out the data.
 
 > For more information, check out [the GitHub Secrets documentation](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository).
 
@@ -137,24 +129,21 @@ To publish your pack to Modrinth or Curseforge, you have to make new [`MODRINTH_
 | `filename` | What to name the generated pack | `True` |
 | `parts` | A list of files or directories to make the pack out of | `True` |
 | `output-directory` | What directory to store the pack in | `False` |
-| `optimize-files` | Whether to optimize JSON and texture files (Lossless) | `False` |
+| `optimize-files` | Whether to optimize JSON and texture files (Lossless) | `True` |
 |
-| `release-version` | The name of the release | `True` |
-| `release-name` | The version of the release | `False` |
+| `release-name` | The name of the release | `False` |
+| `release-version` | The version of the release | `True` |
 | `changelog` | The changelog for the release | `False` |
+| `prerelease` | Whether the release is an early, preview release | `False` |
 | `minecraft-versions` | What versions of Minecraft are supported with this release | `False` |
 |
-| `github-repo` | The Github repository to publish the release to | `False` |
+| `github-repo` | The GitHub repository to publish the release to | `False` |
 | `modrinth-id` | The Modrinth project to publish the release to | `False` |
-| `curseforge-id` | The Curseforge project to publish the release to | `False` |
+| `curseforge-id` | The CurseForge project to publish the release to | `False` |
 |
-| `github-token` | The Github access token used to publish the release | `True` (if `github-repo` is specified) |
-| `modrinth-token` | The Modrinth access token used to publish the release | `True` (if `github-repo` is specified) |
-| `curseforge-token` | The Curseforge access token used to publish the release | `True` (if `github-repo` is specified) |
-
-# Known Issues
-
-- Currently, updating Modrinth resource packs simply does not work, if you are able to figure it out [(because I really cannot)](https://discord.com/channels/734077874708938864/1079544436964474971), please send a PR!
+| `github-token` | The GitHub access token used to publish the release | `True` (if `github-repo` is specified) |
+| `modrinth-token` | The Modrinth access token used to publish the release | `True` (if `modrinth-id` is specified) |
+| `curseforge-token` | The CurseForge access token used to publish the release | `True` (if `curseforge-id` is specified) |
 
 # Credits
 
@@ -163,4 +152,4 @@ A big Thank You to:
 - [**Kayra Uylar**](https://github.com/kuylar) for making [Curserinth](https://curserinth.kuylar.dev/), which saved me from having to use 2 different API tokens for CurseForge.
 - [**IntellectualSites**](https://github.com/IntellectualSites) for making the [CurseForge Version Identifier](https://github.com/IntellectualSites/CurseForge-version-identifier) repository, which also saved me from having to use 2 different API tokens for CurseForge.
 
-###### And a huge I Hate You to Curseforge, for requiring 2 different API tokens.
+###### And a huge I Hate You to CurseForge, for requiring 2 different API tokens.
