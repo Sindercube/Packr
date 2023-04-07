@@ -6,6 +6,7 @@ __pycache__/
 build/
 pack_textures/
 pack_data/
+test/
 
 __pycache__/
 
@@ -13,5 +14,6 @@ __pycache__/
 build/
 .pylintrc
 test.sh
+test.py
 test_pack
 .github/

@@ -24,11 +24,38 @@ The supported distribution platforms are:
   - [Inputs](#inputs)
 - [Credits](#credits)
 
-# CLI Usage
+# Usage
 
-To use packr as a CLI tool, you first have to install it using `pip install git+https://github.com/sindercube/packr`
+**Packr** generates resource packs using a YAML file.
+The default file used by Packr is `packr.yml`.
 
-After it is installed, use `python -m packr -h` to view how to use the tool.
+## Example File
+
+`packr.yml`
+```yaml
+files:
+  - pack.zip:
+    - test_pack/*
+  - extra.zip
+
+minecraft-versions:
+  - 1.18.2
+```
+
+The `files` key is used to assign a list of files to generate.
+
+You can automatically compress files into a `.zip` file by adding more keys to a value.
+> To add a file too the zip file, simply give its path. (`assets/pack.mcmeta`)
+
+> To add every file from a directory to the zip file, give its path and add a star. (`assets/*`)
+
+## Generating Using CLI
+
+To use **Packr** as a CLI tool, you first have to install it using `pip install git+https://github.com/sindercube/packr`
+
+To generate the resource packs, simply run `python -m packr`
+
+> Run `python -m packr -h` for additional information.
 
 # GitHub Workflow Usage
 
@@ -41,7 +68,7 @@ To automatically generate Resource Packs from the contents of your GitHub reposi
 
 ## Minimal Example
 
-This is an example of the simplest possible Packr configuration, which just adds the pack files to your GitHub release.
+An example of a Packr configuration, which just adds the generated files to your GitHub release.
 
 `publish.yml`
 ```yaml
@@ -54,19 +81,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - name: Build & Upload Pack
-        uses: Sindercube/Packr@v1
+      - name: Build & Upload Packs
+        uses: Sindercube/Packr@v2
         with:
 
-          filename: pack.zip # The file name of your pack.
-          parts: | # The files and folders you want to use in your pack. Separated with new lines.
-            assets/*
-          # You should put your pack files inside of the assets/ folder, but you can change which folder is used with this. 
-          minecraft-versions: | # What Minecraft versions are supported by your pack. Add every new version on a new line.
-            1.18.2
-          # 1.19.2 # Example of another version.
-
-          # You shouldn't change these values unless you know what you're doing
           github-repo: ${{ github.event.repository.full_name }}
           release-version: ${{ github.event.release.tag_name }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -88,17 +106,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - name: Build & Upload Pack
-        uses: Sindercube/Packr@v1
+      - name: Build & Upload Packs
+        uses: Sindercube/Packr@v2
         with:
 
-          filename: pack.zip
-          parts: |
-            test_pack/*
-          output-directory: build/ 
-          optimize-files: true
-          minecraft-versions: |
-            1.18.2
+          filename: packr.yml
 
           modrinth-id: 'xxxxxxxx'
           curseforge-id: '000000'
@@ -114,8 +126,6 @@ jobs:
           curseforge-token: ${{ secrets.CURSEFORGE_API_TOKEN }} # https://www.curseforge.com/account/api-tokens
 ```
 
-> If you want to generate multiple packs, just copy-paste the `Build Pack` step.
-
 ## Access Tokens
 
 To publish your pack to Modrinth or CurseForge, you have to make new [`MODRINTH_TOKEN`](https://modrinth.com/settings/account) and [`CURSEFORGE_TOKEN`](https://www.curseforge.com/account/api-tokens) secrets in your repository's settings in **Settings > Secrets & Variables > Actions**, then clicking the **New Repository Secret** button and filling out the data.
@@ -126,21 +136,17 @@ To publish your pack to Modrinth or CurseForge, you have to make new [`MODRINTH_
 
 | Name | Description | Required |
 | - | - | - |
-| `filename` | What to name the generated pack | `True` |
-| `parts` | A list of files or directories to make the pack out of | `True` |
-| `output-directory` | What directory to store the pack in | `False` |
-| `optimize-files` | Whether to optimize JSON and texture files (Lossless) | `True` |
-|
+| `filename` | What YAML file to generate the packs from | `True` |
+|||
 | `release-name` | The name of the release | `False` |
 | `release-version` | The version of the release | `True` |
 | `changelog` | The changelog for the release | `False` |
 | `prerelease` | Whether the release is an early, preview release | `False` |
-| `minecraft-versions` | What versions of Minecraft are supported with this release | `False` |
-|
+|||
 | `github-repo` | The GitHub repository to publish the release to | `False` |
 | `modrinth-id` | The Modrinth project to publish the release to | `False` |
 | `curseforge-id` | The CurseForge project to publish the release to | `False` |
-|
+|||
 | `github-token` | The GitHub access token used to publish the release | `True` (if `github-repo` is specified) |
 | `modrinth-token` | The Modrinth access token used to publish the release | `True` (if `modrinth-id` is specified) |
 | `curseforge-token` | The CurseForge access token used to publish the release | `True` (if `curseforge-id` is specified) |
@@ -152,4 +158,4 @@ A big Thank You to:
 - [**Kayra Uylar**](https://github.com/kuylar) for making [Curserinth](https://curserinth.kuylar.dev/), which saved me from having to use 2 different API tokens for CurseForge.
 - [**IntellectualSites**](https://github.com/IntellectualSites) for making the [CurseForge Version Identifier](https://github.com/IntellectualSites/CurseForge-version-identifier) repository, which also saved me from having to use 2 different API tokens for CurseForge.
 
-###### And a huge I Hate You to CurseForge, for requiring 2 different API tokens.
+###### And a huge I Hate You to CurseForge.

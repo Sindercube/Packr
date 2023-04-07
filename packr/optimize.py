@@ -5,13 +5,15 @@ from json import load, dump, JSONDecodeError
 from PIL import Image
 
 
-def copy(src, dest):
+def copy(src: Path, dest: Path):
+    """Basic file/directory copying function."""
     copy2(str(src), str(dest))
 
 
-def copy_and_optimize(src, dest):
+def copy_and_optimize(src: Path, dest: Path):
+    """Advanced file/directory copying function with added image / JSON file optimization."""
     src, dest = Path(src), Path(dest)
-    dest = dest #/ Path(''.join(src.parts[1:]))
+    #dest = dest #/ Path(''.join(src.parts[1:]))
 
     if src.suffix == '.png':
         return optimize_image(src, dest)

@@ -1,7 +1,7 @@
 from typing import List, Literal
 from requests import request
 
-from .. import ResourcePack
+from .. import Resource_Pack
 
 class AuthorizationError(Exception):
     pass
@@ -21,12 +21,12 @@ class Host:
     auth_header_key: str
     auth_header_prefix: str = ''
 
-    rp: ResourcePack
+    rp: Resource_Pack
     id: str
     token: str
     upload_url: str
 
-    def __init__(self, resource_pack: ResourcePack, host_token: str, project_id: str):
+    def __init__(self, resource_pack: Resource_Pack, host_token: str, project_id: str):
 
         self.rp = resource_pack
         self.id = project_id

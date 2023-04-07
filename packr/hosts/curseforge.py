@@ -45,13 +45,15 @@ class CurseForge(Host):
 
         files_url = f'https://curserinth-api.kuylar.dev/v2/project/{self.id}/version'
         file_data = self.get(files_url).json()
+        print(file_data)
 
         files = {}
         for file in file_data:
             release = file['name'].split(' - ', 1)[0]
-            file_id = str(file['id'])
+            file_id = int(file['id'])
             if not release in files:
                 files[release] = file_id
+        print(files)
 
         if version in files:
             metadata['fileID'] = files[version]

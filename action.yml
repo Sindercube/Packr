@@ -5,20 +5,7 @@ author: 'Sindercube'
 inputs:
 
   filename:
-    description: 'What to name the generated pack.'
-
-  parts:
-    description: 'A list of files or directories to make the pack out of.'
-
-  output-directory:
-    description: 'What directory to store the pack in'
-    default: 'build/'
-    required: false
-
-  optimize-files:
-    description: "Whether or not to optimize JSON and texture files"
-    default: 'true'
-    required: false
+    description: 'What YAML file to generate the pack from.'
 
 
   release-name:
@@ -39,11 +26,6 @@ inputs:
   prerelease:
     description: "Whether the release is an early, preview release"
     default: 'false'
-    required: false
-
-  minecraft-versions:
-    description: "What versions of Minecraft are supported with this release"
-    default: ''
     required: false
 
 
