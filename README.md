@@ -16,7 +16,9 @@ The supported distribution platforms are:
 
 # Table of Contents 
 
-- [CLI Usage](#cli-usage)
+- [Usage](#usage)
+  - [Example File](#example-file)
+  - [CLI Usage](#generating-using-cli)
 - [GitHub Workflow Usage](#github-workflow-usage)
   - [Minimal Example](#minimal-example)
   - [Advanced Example](#advanced-example)
